@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // The Docker image runs .next/standalone/server.js without node_modules.
+  output: "standalone",
   experimental: {
     agentFeedback: true,
   },

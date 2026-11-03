@@ -80,6 +80,12 @@ Content is cached with no expiry, so Sanity has to tell the site when something 
 - **Trigger:** Create, Update, Delete
 - **Secret:** the same value as `SANITY_REVALIDATE_SECRET`
 
+## Deployment
+
+The site ships as a Docker image built from `Dockerfile` (Next.js standalone output, port 3000, health check at `/api/health`). See [DEPLOYMENT.md](DEPLOYMENT.md) for the full VPS setup with Dokploy, plus a plain Docker Compose option.
+
+`NEXT_PUBLIC_*` variables are inlined at build time, so pass them as build arguments and rebuild after changing them.
+
 ## Project structure
 
 ```text

@@ -1,0 +1,21 @@
+# Local test or a VPS without Dokploy:
+#   cp .env.example .env   (fill it in)
+#   docker compose up -d --build
+# Dokploy uses the Dockerfile directly, see DEPLOYMENT.md.
+
+services:
+  web:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_SANITY_PROJECT_ID: ${NEXT_PUBLIC_SANITY_PROJECT_ID:-}
+        NEXT_PUBLIC_SANITY_DATASET: ${NEXT_PUBLIC_SANITY_DATASET:-production}
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3000}
+    image: kebun-kita-cp:latest
+    restart: unless-stopped
+    environment:
+      SANITY_API_READ_TOKEN: ${SANITY_API_READ_TOKEN:-}
+      SANITY_REVALIDATE_SECRET: ${SANITY_REVALIDATE_SECRET:-}
+    ports:
+      - "127.0.0.1:${APP_PORT:-3000}:3000"
+    stop_grace_period: 30s
